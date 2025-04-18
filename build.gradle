@@ -1,4 +1,3 @@
-
 plugins {
     id 'application'
 }
@@ -15,10 +14,13 @@ application {
     mainClass = 'org.example.Main'
 }
 
-tasks.register('copyWebsiteToDocs', Copy) {
-    from('src/main/resources/website') {
-        include '**/*.html', '**/*.css', '**/*.js', '**/*.png', '**/*.jpg', '**/*.jpeg', '**/*.gif'
-    }
-    into 'docs'
-}
+// Task to copy HTML, CSS, and images to 'docs' folder
+tasks.register('prepareDocs', Copy) {
+    description = 'Copies HTML, CSS, and images to the docs folder.'
+    group = 'documentation'
 
+    from('src/main/resources/website') {
+        include '**/*.html', '**/*.css', '**/*.js', '**/*.png', '**/*.jpg', '**/*.jpeg', '**/*.gif', '**/*.svg'
+    }
+    into("$rootDir/docs")
+}
